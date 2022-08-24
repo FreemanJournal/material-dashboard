@@ -1,0 +1,57 @@
+@import '../../Assets/variables';
+
+.navbar {
+    // background: $dark;
+    height: 5em;
+    padding: 1em 3em;
+
+    .wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        .search {
+            display: flex;
+            // justify-content: center;
+            // align-items: center;
+            border: 1px solid $light;
+            border-radius: 8px;
+            font-size: 1.2em;
+            padding: 0;
+
+            .icon {
+                font-size: 1em;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 5px;
+                border-left: 1px solid $light;
+                transition: all 200ms ease-in-out;
+
+                &:hover {
+                    background: $main;
+                    color: $contrastText;
+                    border-radius: 0 8px 8px 0;
+
+                }
+
+            }
+
+            input {
+                border: none;
+                background: transparent;
+                padding: .5em;
+                width: 17em;
+
+                &:focus {
+                    border: none;
+                    outline: none;
+                }
+            }
+        }
+        .items{
+            
+        }
+
+    }
+}

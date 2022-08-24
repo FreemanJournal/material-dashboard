@@ -1,0 +1,8 @@
+@API_URL = https://rabbil-gadget-ecom.herokuapp.com/api/v1
+GET {{API_URL}}/brand/1/10/null
+
+POST {{API_URL}}/brand
+Content-Type: application/json
+{
+    "name":"Sumsung"
+}
