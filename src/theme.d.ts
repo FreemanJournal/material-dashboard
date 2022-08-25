@@ -7,4 +7,13 @@ declare module '@mui/material/styles'{
     interface PaletteOptions{
         custom?:PaletteColorOptions
     }
+    interface SimplePaletteColorOptions{
+        light_dark?:string,
+        bg_shadow?:string
+    }
+    interface PaletteColor{
+        light_dark?:string,
+        bg_shadow?:string
+
+    }
 }

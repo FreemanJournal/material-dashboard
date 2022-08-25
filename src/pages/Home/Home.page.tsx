@@ -1,5 +1,10 @@
+import { Stack, Typography } from "@mui/material";
+import Chart from "../../components/chart/Chart";
+import FeaturedChart from "../../components/featureChart/FeaturedChart";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
+import TransactionsHistory from "../../components/table/Table";
+import Widget from "../../components/widgets/Widget";
 import "./home.scss";
 export default function Home() {
   // TODO:Implement Authentication here
@@ -10,9 +15,20 @@ export default function Home() {
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
-        <div className="widgets">
-          
-        </div>
+        <Stack className="widgets" direction="row" gap={3} p={4}>
+          <Widget type="users" />
+          <Widget type="orders" />
+          <Widget type="earnings" />
+          <Widget type="balance" />
+        </Stack>
+        <Stack className="charts" direction={'row'} p={3} gap={3}>
+          <FeaturedChart />
+          <Chart />
+        </Stack>
+        <Stack className="listContainer" p={3}>
+          <TransactionsHistory/>
+      
+      </Stack>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import Home from "./pages/Home/Home.page";
 import List from "./pages/List/List.page";
 import New from "./pages/New/New.page";
 import Single from "./pages/Single/Single.page";
-
+import 'react-circular-progressbar/dist/styles.css';
 const theme = createTheme({
   palette: {
     custom: {
@@ -14,8 +14,11 @@ const theme = createTheme({
       light: "#B0EACD",
       dark: "#2E374F",
       contrastText: "#F4F4F6",
-    }
-  }
+      light_dark: "#758283",
+      bg_shadow:"rgba(0, 0, 0, 0.16) 0px 1px 4px",
+      // bg_shadow:"rgba(0, 0, 0, 0.16) 0px 1px 4px"
+    },
+  },
 });
 
 function App() {
