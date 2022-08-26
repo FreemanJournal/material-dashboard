@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Chart from "../../components/chart/Chart";
 import FeaturedChart from "../../components/featureChart/FeaturedChart";
 import Navbar from "../../components/navbar/Navbar";
@@ -11,9 +11,9 @@ export default function Home() {
   // FIXME: Set up proper google authentication
 
   return (
-    <div className="home">
+    <Stack className="home" direction={"row"}>
       <Sidebar />
-      <div className="homeContainer">
+      <Box flex={5} className="homeContainer" sx={{backgroundColor:"custom.bg"}}>
         <Navbar />
         <Stack className="widgets" direction="row" gap={3} p={4}>
           <Widget type="users" />
@@ -27,9 +27,8 @@ export default function Home() {
         </Stack>
         <Stack className="listContainer" p={3}>
           <TransactionsHistory/>
-      
       </Stack>
-      </div>
-    </div>
+      </Box>
+    </Stack>
   );
 }

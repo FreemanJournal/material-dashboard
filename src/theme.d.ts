@@ -9,11 +9,11 @@ declare module '@mui/material/styles'{
     }
     interface SimplePaletteColorOptions{
         light_dark?:string,
-        bg_shadow?:string
+        bg?:string
     }
     interface PaletteColor{
         light_dark?:string,
-        bg_shadow?:string
+        bg?:string
 
     }
 }

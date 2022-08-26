@@ -1,16 +1,21 @@
 import {
-  Dashboard, DirectionsRunSharp,
+  Dashboard,
+  DirectionsRunSharp,
   GroupSharp,
   LocalMallSharp,
-  LocalShippingSharp, LoginSharp,
-  LogoutSharp, MonitorHeartSharp,
+  LocalShippingSharp,
+  LoginSharp,
+  LogoutSharp,
+  MonitorHeartSharp,
   NotificationsSharp,
   PersonSharp,
   SettingsSuggestSharp,
-  StorefrontSharp
+  StorefrontSharp,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import "./sidebar.scss";
 export default function Sidebar() {
+  const navigate = useNavigate();
   return (
     <div className="sidebar">
       <div className="top">
@@ -20,57 +25,57 @@ export default function Sidebar() {
       <div className="center">
         <ul>
           <p className="title">Main</p>
-          <li>
-            <Dashboard className="icon"/>
+          <li onClick={() => navigate("/")}>
+            <Dashboard className="icon" />
             <span>Dashboard</span>
           </li>
           <p className="title">Lists</p>
-          <li>
-            <GroupSharp className="icon"/>
+          <li onClick={() => navigate("/users")}>
+            <GroupSharp className="icon" />
             <span>Users</span>
           </li>
-          <li>
-            <StorefrontSharp className="icon"/>
+          <li onClick={() => navigate("/products")}>
+            <StorefrontSharp className="icon" />
             <span>Products</span>
           </li>
-          <li>
-            <LocalMallSharp className="icon"/>
+          <li onClick={() => navigate("/orders")}>
+            <LocalMallSharp className="icon" />
             <span>Orders</span>
           </li>
-          <li>
-            <LocalShippingSharp className="icon"/>
+          <li onClick={() => navigate("/")}>
+            <LocalShippingSharp className="icon" />
             <span>Delivery</span>
           </li>
           <p className="title">Use full</p>
-          <li>
-            <MonitorHeartSharp className="icon"/>
+          <li onClick={() => navigate("/")}>
+            <MonitorHeartSharp className="icon" />
             <span>Stats</span>
           </li>
-          <li>
-            <NotificationsSharp className="icon"/>
+          <li onClick={() => navigate("/")}>
+            <NotificationsSharp className="icon" />
             <span>Notifications</span>
           </li>
 
           <p className="title">Service</p>
-          <li>
-            <DirectionsRunSharp className="icon"/>
+          <li onClick={() => navigate("/")}>
+            <DirectionsRunSharp className="icon" />
             <span>System Health</span>
           </li>
-          <li>
-            <LoginSharp className="icon"/>
+          <li onClick={() => navigate("/")}>
+            <LoginSharp className="icon" />
             <span>Logs</span>
           </li>
-          <li>
-            <SettingsSuggestSharp className="icon"/>
+          <li onClick={() => navigate("/")}>
+            <SettingsSuggestSharp className="icon" />
             <span>Settings</span>
           </li>
           <p className="title">User</p>
-          <li>
-            <PersonSharp className="icon"/>
+          <li onClick={() => navigate("/")}>
+            <PersonSharp className="icon" />
             <span>Profile</span>
           </li>
-          <li>
-            <LogoutSharp className="icon"/>
+          <li onClick={() => navigate("/")}>
+            <LogoutSharp className="icon" />
             <span>Logout</span>
           </li>
         </ul>

@@ -15,8 +15,7 @@ const theme = createTheme({
       dark: "#2E374F",
       contrastText: "#F4F4F6",
       light_dark: "#758283",
-      bg_shadow:"rgba(0, 0, 0, 0.16) 0px 1px 4px",
-      // bg_shadow:"rgba(0, 0, 0, 0.16) 0px 1px 4px"
+      bg:"#f0f8ff"
     },
   },
 });
@@ -37,6 +36,11 @@ function App() {
             <Route path="products">
               <Route index element={<List />} />
               <Route path=":productID" element={<Single />} />
+              <Route path="new" element={<New />} />
+            </Route>
+            <Route path="orders">
+              <Route index element={<List />} />
+              <Route path=":orderID" element={<Single />} />
               <Route path="new" element={<New />} />
             </Route>
           </Route>
