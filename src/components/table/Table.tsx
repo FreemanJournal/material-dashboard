@@ -45,9 +45,9 @@ export default function Tables() {
       >
         Transaction History (Last 6 months)
       </Typography>
-      <TableContainer component={Paper} sx={{ marginTop: "3em" }}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
+      <TableContainer component={Paper} sx={{ marginTop: "3em" ,maxHeight:"30em"}}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" stickyHeader>
+          <TableHead >
             <TableRow>
               <TableCell>Tracking ID</TableCell>
               <TableCell>Product</TableCell>

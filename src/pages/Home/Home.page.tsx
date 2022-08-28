@@ -1,6 +1,6 @@
-import { Box, Stack, Typography } from "@mui/material";
-import Chart from "../../components/chart/Chart";
+import { Box, Stack } from "@mui/material";
 import FeaturedChart from "../../components/featureChart/FeaturedChart";
+import HomeChart from "../../components/featureChart/HomeChart";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import TransactionsHistory from "../../components/table/Table";
@@ -23,7 +23,7 @@ export default function Home() {
         </Stack>
         <Stack className="charts" direction={'row'} p={3} gap={3}>
           <FeaturedChart />
-          <Chart />
+          <HomeChart />
         </Stack>
         <Stack className="listContainer" p={3}>
           <TransactionsHistory/>

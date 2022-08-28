@@ -1,14 +1,16 @@
 import { Delete, Edit, PanoramaFishEye, VisibilityOutlined } from "@mui/icons-material";
 import { Box, IconButton, Stack } from "@mui/material";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { useNavigate } from "react-router-dom";
 import { userColumns, userRows } from "./datatablesource";
 
 export default function DataTable() {
+  const navigate = useNavigate();
   function deleteHandler(id: string) {
     console.log("deleteID", id);
   }
   function viewHandler(id: string) {
-    console.log("ViewID", id);
+    navigate(`/users/${id}`)
   }
   const actionColumn: GridColDef[] = [
     {
