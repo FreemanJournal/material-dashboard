@@ -1,0 +1,13 @@
+.productMiniCard{
+    .deleteIcon{
+        opacity: 0;
+    }
+    transition:hover 300ms ease-in-out;
+
+    &:hover{
+        .deleteIcon{
+            opacity: 1;
+            background: white;
+        }
+    }
+}

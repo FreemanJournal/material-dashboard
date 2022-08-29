@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Navbar from "../../components/navbar/Navbar";
-import ProductImages from "../../components/productWidgets/Images";
-import ProductInfo from "../../components/productWidgets/Information";
+import ProductImages from "../../components/productWidgets/Images/Images";
+import ProductInfo from "../../components/productWidgets/information/Information";
 import Sidebar from "../../components/sidebar/Sidebar";
 interface FormData {
   images: string;
@@ -39,8 +39,8 @@ export default function New() {
             Add New Product
           </Typography>
           <Stack className="" direction="row" gap={3}>
-            <ProductInfo />
-            <ProductImages register={register} />
+            <ProductInfo register={register}/>
+            <ProductImages register={register} watch={watch}/>
           </Stack>
         </Box>
       </Box>

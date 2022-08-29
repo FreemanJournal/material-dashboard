@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, ThemeProvider,CssBaseline } from "@mui/material";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Authorization from "./pages/Authorization/Authorization.page";
@@ -9,6 +9,12 @@ import Single from "./pages/Single/Single.page";
 import 'react-circular-progressbar/dist/styles.css';
 const theme = createTheme({
   palette: {
+    primary: {
+      main: "#B0EACD",
+      light: "#B0EACD",
+      dark: "#2E374F",
+      contrastText: "#F4F4F6",
+    },
     custom: {
       main: "#21BF73",
       light: "#B0EACD",
@@ -20,9 +26,12 @@ const theme = createTheme({
   },
 });
 
+
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
+       <CssBaseline/>
       <BrowserRouter>
         <Routes>
           <Route path="/">
