@@ -2,26 +2,12 @@ import {
   Box, Divider, Stack,
   Typography
 } from "@mui/material";
+import { EnhancedImageStack } from "../../../utilities/FormHook";
 import EnhancedTextField from "./EnhancedTextField";
 import MiniCard from "./MiniCard";
-export default function ProductImages({ register, watch }: any) {
-  let watchImages = watch("images");
+export default function ProductImages({ register, control }: any) {
 
-  function EnhancedMiniCard() {
-    if (watchImages?.length > 0) {
-      let allCard = [];
-      for (const key in watchImages) {
-        if (typeof watchImages[key] === "object") {
-          console.log('image Files',watchImages[key].size)
-          allCard.push(
-            <MiniCard url={URL.createObjectURL(watchImages[key])} size={watchImages[key].size} key={key}/>
-          );
-        }
-      }
-      return <>{allCard}</>;
-    }
-    return <></>;
-  }
+
 
   return (
     <Box className="bg_shadow" flex={1} p={3}>
@@ -31,12 +17,13 @@ export default function ProductImages({ register, watch }: any) {
       <Divider/>
       <Box p={3}>
         <Box className="right">
-          <Stack gap={2}>
+          <EnhancedImageStack control={control} register={register}/>
+          {/* <Stack gap={2}>
             <EnhancedTextField register={register} length={watchImages?.length || 0}/>
             <Stack direction={'row'} gap={3} flexWrap="wrap">
               <EnhancedMiniCard/>
             </Stack>
-          </Stack>
+          </Stack> */}
         </Box>
       </Box>
     </Box>

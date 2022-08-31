@@ -19,7 +19,7 @@ export default function EnhancedTextField({ register,length }: any) {
         {...register("images")}
       />
       <Box
-        component="form"
+        
         sx={{
           p: "2px 4px",
           display: "flex",

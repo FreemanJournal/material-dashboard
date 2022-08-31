@@ -2,38 +2,55 @@ import {
   Box,
   Divider,
   FormControl,
-  FormHelperText,
   InputAdornment,
-  InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
   Stack,
   TextField,
   Typography,
-  useFormControl
+  useFormControl,
 } from "@mui/material";
-import { useMemo } from "react";
+import { forwardRef } from "react";
+import { DiscountTextFiled } from "../../../utilities/FormHook";
+import { BootstrapInput } from "../../../utilities/MuiCustomComponent";
 import {
   MoneyFormatCustom,
-  NumberFormatCustom
+  NumberFormatCustom,
 } from "../../../utilities/NumberFormat";
 import "./information.scss";
-export default function ProductInfo({ register }: any) {
+export default function ProductInfo({ register, control }: any) {
   const { focused } = useFormControl() || {};
-  function MyFormHelperText() {
-    const { focused } = useFormControl() || {};
+  // const [discountType, setDiscountType] = useState();
 
-    const helperText = useMemo(() => {
-      if (focused) {
-        return "This field is being focused";
-      }
-
-      return "Helper text";
-    }, [focused]);
-
-    return <FormHelperText>{helperText}</FormHelperText>;
-  }
+  const EnhancedTypography = ({ title }: { title: string }) => (
+    <Typography
+      sx={{
+        flex: 1,
+        fontSize: ".8em",
+        color: "custom.light_dark",
+      }}
+    >
+      {title}
+    </Typography>
+  );
+  const EnhancedTextfield = forwardRef((props: any, ref) => (
+    <TextField
+      ref={ref}
+      id="standard-required"
+      size="small"
+      variant="outlined"
+      color="secondary"
+      {...props}
+    />
+  ));
+  const EnhancedStack = (props: any) => {
+    return (
+      <Stack direction={"row"} gap={2} alignItems="center" {...props}>
+        {props.children}
+      </Stack>
+    );
+  };
 
   return (
     <Box className="left bg_shadow" flex={1} p={3}>
@@ -43,204 +60,147 @@ export default function ProductInfo({ register }: any) {
       <Divider />
       <Box p={3}>
         <div className="left"></div>
-        <Box component="form" className="right">
+        <Box className="right">
           <Stack gap={2}>
-            <Stack direction={"row"} gap={3} alignItems="center">
-              <Typography
-                sx={{ flex: 1, fontSize: ".8em", color: "custom.light_dark" }}
-              >
-                Product Name
-              </Typography>
-              <FormControl
-                size="small"
-                color="primary"
-                fullWidth
-                sx={{
-                  flex: 4,
-                  "& .MuiOutlinedInput-root": {
-                    "&:hover fieldset": {
-                      borderColor: "custom.light",
-                    },
+            <Box
+              // size="small"
+              color="secondary"
+              // fullWidth
+              aria-label="product information form control"
+              sx={{
+                flex: 4,
+                "& .MuiOutlinedInput-root": {
+                  "&:hover fieldset": {
+                    borderColor: "custom.light",
                   },
-                }}
+                },
+              }}
+            >
+              <Stack
+                direction={"column"}
+                gap={3}
+                aria-label="product information textfield stack"
               >
-                <OutlinedInput placeholder="Product name" autoFocus />
-              </FormControl>
-            </Stack>
-            <Stack direction={"row"} gap={3} alignItems="center">
-              <Typography
-                sx={{ flex: 1, fontSize: ".8em", color: "custom.light_dark" }}
-              >
-                Unit price
-              </Typography>
-              <FormControl
-                size="small"
-                color="primary"
-                fullWidth
-                
-                sx={{
-                  flex: 4,
-                  "& .MuiOutlinedInput-root": {
-                    "&:hover fieldset": {
-                      borderColor: "custom.light",
-                    },
-                  },
-                }}
-              >
-                <OutlinedInput
-                  placeholder="Unit price"
-                  autoFocus
-                  inputProps={{
-                    inputComponent: MoneyFormatCustom as any,
-                  }}
-                />
-              </FormControl>
-            </Stack>
+                <EnhancedStack aria-label="product name label and textfield stack">
+                  <EnhancedTypography title="Product Name" />
+                  <EnhancedTextfield
+                    placeholder="Product name"
+                    InputProps={{
+                      components: (<OutlinedInput />) as any,
+                    }}
+                    sx={{ flex: 3 }}
+                    {...register("product_name")}
+                    // helperText="This field is required."
+                  />
+                </EnhancedStack>
+                <EnhancedStack aria-label="unit price and quantity stack">
+                  <EnhancedTypography title="Unit price" />
 
-            <Stack direction={"row"} gap={3}>
-              <TextField
-                required
-                id="standard-required"
-                placeholder="Iphone XI"
-                label="Product name"
-                size="small"
-                variant="standard"
-                // helperText="This field is required."
-                {...register("product_name")}
-                sx={{ flex: 2 }}
-                color={"custom"}
-              />
-              <TextField
-                id="standard-required"
-                label="Minimum purchase qty"
-                size="small"
-                variant="standard"
-                InputProps={{
-                  inputComponent: NumberFormatCustom as any,
-                  endAdornment: (
-                    <InputAdornment position="end">unit</InputAdornment>
-                  ),
-                }}
-                defaultValue={1}
-                // helperText="This field is required."
-                sx={{ flex: 1 }}
-              />
-            </Stack>
+                  <EnhancedStack
+                    flex={3}
+                    aria-label="unit price and quantity textField"
+                  >
+                    <EnhancedTextfield
+                      placeholder="Price per unit"
+                      {...register("price_per_unit")}
+                      InputProps={{
+                        inputComponent: MoneyFormatCustom as any,
+                        endAdornment: (
+                          <InputAdornment position="end">/unit</InputAdornment>
+                        ),
+                        components: (<OutlinedInput />) as any,
+                      }}
+                      // helperText="This field is required."
+                      sx={{ flex: 1 }}
+                    />
+                    <EnhancedTextfield
+                      placeholder="Quantity"
+                      {...register("quantity")}
+                      InputProps={{
+                        inputComponent: NumberFormatCustom as any,
+                        components: (<OutlinedInput />) as any,
+                      }}
+                      // helperText="This field is required."
+                      sx={{ flex: 1 }}
+                    />
+                  </EnhancedStack>
+                </EnhancedStack>
+                <EnhancedStack aria-label="discount and discount types stack">
+                  <EnhancedTypography title="Discount" />
 
-            <Stack direction={"row"} gap={3}>
-              <TextField
-                required
-                id="standard-required"
-                placeholder="10"
-                label="Unit price"
-                size="small"
-                variant="standard"
-                // helperText="This field is required."
-                InputProps={{
-                  inputComponent: MoneyFormatCustom as any,
-                }}
-                sx={{ flex: 2 }}
-                {...register("unit_price")}
-              />
-              <TextField
-                required
-                id="standard-required"
-                placeholder="10"
-                label="Unit"
-                size="small"
-                variant="standard"
-                // helperText="This field is required."
-                InputProps={{
-                  inputComponent: NumberFormatCustom as any,
-                  endAdornment: (
-                    <InputAdornment position="end">Unit</InputAdornment>
-                  ),
-                }}
-                sx={{ flex: 1 }}
-                {...register("total_unit")}
-              />
-            </Stack>
-            <Stack direction={"row"} gap={3}>
-              <TextField
-                id="standard-required"
-                placeholder="0"
-                label="Discount"
-                size="small"
-                variant="standard"
-                defaultValue={0}
-                sx={{ flex: 2 }}
-                InputProps={{
-                  inputComponent: NumberFormatCustom as any,
-                }}
-                {...register("discount")}
-              />
-              <FormControl
-                sx={{ minWidth: 120, flex: 1 }}
-                size={"small"}
-                variant="standard"
-              >
-                <InputLabel id="demo-simple-select-helper-label">
-                  Discount Type
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  defaultValue={"percent"}
-                  // value={age}
-                  label="Discount Type"
-                  // onChange={handleChange}
-                  {...register("discount_type")}
-                >
-                  <MenuItem value={"percent"}>Percent</MenuItem>
-                  <MenuItem value={"flat"}>Flat</MenuItem>
-                </Select>
-              </FormControl>
-            </Stack>
+                  <EnhancedStack
+                    flex={3}
+                    aria-label="discount and discount types textField"
+                  >
+                    <DiscountTextFiled control={control} register={register} />
 
-            <Stack direction={"row"} gap={3}>
-              <FormControl
-                sx={{ minWidth: 120, flex: 1 }}
-                size={"small"}
-                variant="standard"
-              >
-                <InputLabel id="demo-simple-select-helper-label">
-                  Brand
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  defaultValue={"apple"}
-                  // value={age}
-                  label="brand"
-                  // onChange={handleChange}
-                >
-                  <MenuItem value={"apple"}>Apple</MenuItem>
-                  <MenuItem value={"samsung"}>Samsung</MenuItem>
-                  <MenuItem value={"xiaomi"}>Xiaomi</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl
-                sx={{ minWidth: 120, flex: 1 }}
-                size={"small"}
-                variant="standard"
-              >
-                <InputLabel id="demo-simple-select-helper-label">
-                  Category
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-helper-label"
-                  id="demo-simple-select-helper"
-                  defaultValue={"apple"}
-                  // value={age}
-                  label="category"
-                  // onChange={handleChange}
-                >
-                  <MenuItem value={"apple"}>Apple</MenuItem>
-                  <MenuItem value={"samsung"}>Samsung</MenuItem>
-                  <MenuItem value={"xiaomi"}>Xiaomi</MenuItem>
-                </Select>
-              </FormControl>
-            </Stack>
+                    <FormControl sx={{ flex: 1 }}>
+                      <Select
+                        labelId="discount_type-simple-select-helper-label"
+                        id="discount_type-simple-select-helper"
+                        input={<BootstrapInput />}
+                        label="Discount Type"
+                        name="discount_type"
+                        defaultValue={"percent"}
+                        inputProps={{
+                          components: (<OutlinedInput />) as any,
+                        }}
+                        {...register("discount_type")}
+                      >
+                        <MenuItem value={"percent"}>Percent</MenuItem>
+                        <MenuItem value={"flat"}>Flat</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </EnhancedStack>
+                </EnhancedStack>
+                <EnhancedStack aria-label="brand stack">
+                  <EnhancedTypography title="Brand" />
+
+                  <EnhancedStack flex={3} aria-label="brand textField">
+                    <Select
+                      labelId="demo-simple-select-helper-label"
+                      id="demo-simple-select-helper"
+                      sx={{ flex: 1 }}
+                      defaultValue={"apple"}
+                      input={<BootstrapInput />}
+                      label="Brand"
+                      inputProps={{
+                        components: (<OutlinedInput />) as any,
+                      }}
+                      // onChange={handleChange}
+                      {...register("brand")}
+                    >
+                      <MenuItem value={"apple"}>Apple</MenuItem>
+                      <MenuItem value={"samsung"}>Samsung</MenuItem>
+                      <MenuItem value={"xiaomi"}>Xiaomi</MenuItem>
+                    </Select>
+                  </EnhancedStack>
+                </EnhancedStack>
+                <EnhancedStack aria-label="category stack">
+                  <EnhancedTypography title="Category" />
+
+                  <EnhancedStack flex={3} aria-label="category textField">
+                    <Select
+                      labelId="demo-simple-select-helper-label"
+                      id="demo-simple-select-helper"
+                      sx={{ flex: 1 }}
+                      defaultValue={"smartphone"}
+                      input={<BootstrapInput />}
+                      label="Brand"
+                      inputProps={{
+                        components: (<OutlinedInput />) as any,
+                      }}
+                      // onChange={handleChange}
+                      {...register("category")}
+                    >
+                      <MenuItem value={"smartphone"}>Smartphone</MenuItem>
+                      <MenuItem value={"laptop"}>Laptop</MenuItem>
+                      <MenuItem value={"camera"}>Camera</MenuItem>
+                    </Select>
+                  </EnhancedStack>
+                </EnhancedStack>
+              </Stack>
+            </Box>
           </Stack>
         </Box>
       </Box>

@@ -10,10 +10,17 @@ import 'react-circular-progressbar/dist/styles.css';
 const theme = createTheme({
   palette: {
     primary: {
+      main: "#21BF73",
+      light: "#B0EACD",
+      dark: "#2E374F",
+      contrastText: "#F4F4F6",
+    },
+    secondary: {
       main: "#B0EACD",
       light: "#B0EACD",
       dark: "#2E374F",
       contrastText: "#F4F4F6",
+  
     },
     custom: {
       main: "#21BF73",
