@@ -4,6 +4,7 @@ import { Control, useWatch } from "react-hook-form";
 import EnhancedTextField from "../components/productWidgets/Images/EnhancedTextField";
 import MiniCard from "../components/productWidgets/Images/MiniCard";
 import { DiscountFormatCustom, MoneyFormatCustom } from "./NumberFormat";
+import { useState, useEffect } from "react";
 export interface FormData {
   product_name: string;
   price_per_unit: string;
@@ -14,15 +15,48 @@ export interface FormData {
   category: string;
 }
 
-export function EnhancedImageStack({ control, register }: any) {
+export function EnhancedImageStack({ control, register, setValue }: any) {
+  const [myTruth, setMyTruth] = useState(false);
+  useEffect(() => {}, [myTruth]);
+
   const watchImages = useWatch({
     control,
     name: "images", // without supply name will watch the entire form, or ['firstName', 'lastName'] to watch both
     defaultValue: [], // default value before the render
   });
+
+  function generateCards(allCard: any, deleteHandler: any) {
+    for (const key in watchImages) {
+      if (typeof watchImages[key] === "object") {
+        allCard.push(
+          <MiniCard
+            url={URL.createObjectURL(watchImages[key])}
+            size={watchImages[key].size}
+            key={key}
+            cardId={key}
+            deleteHandler={deleteHandler}
+          />
+        );
+      }
+    }
+  }
+
   function EnhancedMiniCard() {
     if (watchImages?.length > 0) {
-      let allCard = [];
+      const files = Array.from(watchImages);
+      let allCard: any = [];
+      const deleteHandler = (key: string) => {
+        console.log('deleteHandler',key)
+        //  watchImages[key] = 0
+        // setValue("images", watchImages);
+        allCard.splice(+key, 1);
+        // setMyTruth((s) => !s);
+        // console.log("watchAfter files", files);
+        // console.log("watchAfter watchImages", watchImages);
+      };
+
+  
+
       for (const key in watchImages) {
         if (typeof watchImages[key] === "object") {
           allCard.push(
@@ -30,10 +64,13 @@ export function EnhancedImageStack({ control, register }: any) {
               url={URL.createObjectURL(watchImages[key])}
               size={watchImages[key].size}
               key={key}
+              cardId={key}
+              deleteHandler={deleteHandler}
             />
           );
         }
       }
+    
       return <>{allCard}</>;
     }
     return <></>;

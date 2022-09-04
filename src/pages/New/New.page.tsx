@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import ProductImages from "../../components/productWidgets/Images/Images";
 import ProductInfo from "../../components/productWidgets/information/Information";
 import Sidebar from "../../components/sidebar/Sidebar";
-import { FormData } from "../../utilities/FormHook";
+import { FormData } from "../../utilities/CustomFormHook";
 
 export default function New() {
   const {
@@ -41,7 +41,7 @@ export default function New() {
           </Typography>
           <Stack className="" direction="row" gap={3}>
             <ProductInfo register={register} control={control} />
-            <ProductImages register={register} control={control} />
+            <ProductImages register={register} control={control} setValue={setValue}/>
           </Stack>
           <Box
             sx={{

@@ -1,11 +1,8 @@
 import {
-  Box, Divider, Stack,
-  Typography
+  Box, Divider, Typography
 } from "@mui/material";
-import { EnhancedImageStack } from "../../../utilities/FormHook";
-import EnhancedTextField from "./EnhancedTextField";
-import MiniCard from "./MiniCard";
-export default function ProductImages({ register, control }: any) {
+import { EnhancedImageStack } from "../../../utilities/CustomFormHook";
+export default function ProductImages({ register, control,setValue }: any) {
 
 
 
@@ -17,13 +14,8 @@ export default function ProductImages({ register, control }: any) {
       <Divider/>
       <Box p={3}>
         <Box className="right">
-          <EnhancedImageStack control={control} register={register}/>
-          {/* <Stack gap={2}>
-            <EnhancedTextField register={register} length={watchImages?.length || 0}/>
-            <Stack direction={'row'} gap={3} flexWrap="wrap">
-              <EnhancedMiniCard/>
-            </Stack>
-          </Stack> */}
+          <EnhancedImageStack control={control} register={register} setValue={setValue}/>
+         
         </Box>
       </Box>
     </Box>

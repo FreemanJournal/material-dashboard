@@ -9,7 +9,17 @@ import {
 } from "@mui/material";
 import fileSize from "filesize";
 import "./miniCard.scss";
-export default function MiniCard({ url, size }: { url: string; size: number }) {
+export default function MiniCard({
+  url,
+  size,
+  cardId,
+  deleteHandler,
+}: {
+  url: string,
+  size: number,
+  cardId:string,
+  deleteHandler: any
+}) {
   const file = fileSize.partial({ base: 2, standard: "jedec" });
 
   return (
@@ -37,6 +47,7 @@ export default function MiniCard({ url, size }: { url: string; size: number }) {
             color: "error.main",
             backgroundColor: "aliceblue",
           }}
+          onClick={() => deleteHandler(cardId)}
         >
           <Clear fontSize="small" />
         </IconButton>
