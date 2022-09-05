@@ -1,10 +1,10 @@
 import { InputAdornment, OutlinedInput, TextField } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import { Control, useWatch } from "react-hook-form";
+import { useWatch } from "react-hook-form";
 import EnhancedTextField from "../components/productWidgets/Images/EnhancedTextField";
 import MiniCard from "../components/productWidgets/Images/MiniCard";
+import { useAppSelector } from "../redux/hooks";
 import { DiscountFormatCustom, MoneyFormatCustom } from "./NumberFormat";
-import { useState, useEffect } from "react";
 export interface FormData {
   product_name: string;
   price_per_unit: string;
@@ -15,57 +15,21 @@ export interface FormData {
   category: string;
 }
 
-export function EnhancedImageStack({ control, register, setValue }: any) {
-  const [myTruth, setMyTruth] = useState(false);
-  useEffect(() => {}, [myTruth]);
-
-  const watchImages = useWatch({
-    control,
-    name: "images", // without supply name will watch the entire form, or ['firstName', 'lastName'] to watch both
-    defaultValue: [], // default value before the render
-  });
-
-  function generateCards(allCard: any, deleteHandler: any) {
-    for (const key in watchImages) {
-      if (typeof watchImages[key] === "object") {
-        allCard.push(
-          <MiniCard
-            url={URL.createObjectURL(watchImages[key])}
-            size={watchImages[key].size}
-            key={key}
-            cardId={key}
-            deleteHandler={deleteHandler}
-          />
-        );
-      }
-    }
-  }
+export function EnhancedImageStack() {
+ 
+  const sliderImages = useAppSelector<any[]>((state)=>state.products.images)
 
   function EnhancedMiniCard() {
-    if (watchImages?.length > 0) {
-      const files = Array.from(watchImages);
+    if (sliderImages?.length > 0) {
       let allCard: any = [];
-      const deleteHandler = (key: string) => {
-        console.log('deleteHandler',key)
-        //  watchImages[key] = 0
-        // setValue("images", watchImages);
-        allCard.splice(+key, 1);
-        // setMyTruth((s) => !s);
-        // console.log("watchAfter files", files);
-        // console.log("watchAfter watchImages", watchImages);
-      };
-
-  
-
-      for (const key in watchImages) {
-        if (typeof watchImages[key] === "object") {
+      for (const key in sliderImages) {
+        if (typeof sliderImages[key] === "object") {
           allCard.push(
             <MiniCard
-              url={URL.createObjectURL(watchImages[key])}
-              size={watchImages[key].size}
+              url={URL.createObjectURL(sliderImages[key])}
+              size={sliderImages[key].size}
               key={key}
               cardId={key}
-              deleteHandler={deleteHandler}
             />
           );
         }
@@ -79,8 +43,7 @@ export function EnhancedImageStack({ control, register, setValue }: any) {
   return (
     <Stack gap={2}>
       <EnhancedTextField
-        register={register}
-        length={watchImages?.length || 0}
+        length={sliderImages?.length || 0}
       />
       <Stack direction={"row"} gap={3} flexWrap="wrap">
         <EnhancedMiniCard />

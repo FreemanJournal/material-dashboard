@@ -41,7 +41,7 @@ export default function New() {
           </Typography>
           <Stack className="" direction="row" gap={3}>
             <ProductInfo register={register} control={control} />
-            <ProductImages register={register} control={control} setValue={setValue}/>
+            <ProductImages register={register}/>
           </Stack>
           <Box
             sx={{

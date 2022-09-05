@@ -8,19 +8,20 @@ import {
   Typography,
 } from "@mui/material";
 import fileSize from "filesize";
+import { useAppDispatch } from "../../../redux/hooks";
+import { deleteImage } from "../../../redux/state/product.slice";
 import "./miniCard.scss";
 export default function MiniCard({
   url,
   size,
   cardId,
-  deleteHandler,
 }: {
-  url: string,
-  size: number,
-  cardId:string,
-  deleteHandler: any
+  url: string;
+  size: number;
+  cardId: string;
 }) {
   const file = fileSize.partial({ base: 2, standard: "jedec" });
+  const dispatch = useAppDispatch();
 
   return (
     <Card
@@ -47,7 +48,7 @@ export default function MiniCard({
             color: "error.main",
             backgroundColor: "aliceblue",
           }}
-          onClick={() => deleteHandler(cardId)}
+          onClick={() => dispatch(deleteImage(cardId))}
         >
           <Clear fontSize="small" />
         </IconButton>

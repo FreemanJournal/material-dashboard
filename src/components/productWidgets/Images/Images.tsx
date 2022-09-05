@@ -2,7 +2,7 @@ import {
   Box, Divider, Typography
 } from "@mui/material";
 import { EnhancedImageStack } from "../../../utilities/CustomFormHook";
-export default function ProductImages({ register, control,setValue }: any) {
+export default function ProductImages({ register }: any) {
 
 
 
@@ -14,7 +14,8 @@ export default function ProductImages({ register, control,setValue }: any) {
       <Divider/>
       <Box p={3}>
         <Box className="right">
-          <EnhancedImageStack control={control} register={register} setValue={setValue}/>
+          <EnhancedImageStack/>
+          <EnhancedImageStack/>
          
         </Box>
       </Box>

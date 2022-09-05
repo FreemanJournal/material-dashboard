@@ -4,19 +4,25 @@ import {
   Divider,
   InputBase,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
-export default function EnhancedTextField({ register,length }: any) {
+import { useAppDispatch } from "../../../redux/hooks";
+import { setSliderImage } from "../../../redux/state/product.slice";
+export default function EnhancedTextField({ length }: any) {
+  const dispatch = useAppDispatch()
+  const imageUploadHandler = (e:any) => {
+    dispatch(setSliderImage(e.target.files))
+  }
   return (
     <Stack direction={"row"} alignItems="center">
-      <Typography flex="3"> Image</Typography>
+      <Typography flex="3"> Slider Images</Typography>
       <input
         accept="image/*"
         id="icon-product-thumbnail-photo"
         type="file"
         style={{ display: "none" }}
         multiple
-        {...register("images")}
+        onChange={imageUploadHandler}
       />
       <Box
         
