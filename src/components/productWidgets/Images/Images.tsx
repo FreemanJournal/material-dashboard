@@ -1,20 +1,20 @@
 import {
   Box, Divider, Typography
 } from "@mui/material";
-import { EnhancedImageStack } from "../../../utilities/CustomFormHook";
-export default function ProductImages({ register }: any) {
+import { EnhancedImageStack, EnhancedSingleImageStack } from "./CustomFormElements/CustomFormElements";
+export default function ProductImages() {
 
 
 
   return (
     <Box className="bg_shadow" flex={1} p={3}>
       <Typography variant="subtitle2" sx={{ color: "custom.dark_light" }}>
-        Product Images
+        Images
       </Typography>
       <Divider/>
       <Box p={3}>
         <Box className="right">
-          <EnhancedImageStack/>
+          <EnhancedSingleImageStack/>
           <EnhancedImageStack/>
          
         </Box>

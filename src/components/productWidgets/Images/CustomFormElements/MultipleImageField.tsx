@@ -4,28 +4,34 @@ import {
   Divider,
   InputBase,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
-import { useAppDispatch } from "../../../redux/hooks";
-import { setSliderImage } from "../../../redux/state/product.slice";
-export default function EnhancedTextField({ length }: any) {
-  const dispatch = useAppDispatch()
-  const imageUploadHandler = (e:any) => {
-    dispatch(setSliderImage(e.target.files))
-  }
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { setSliderImage } from "../../../../redux/state/product.slice";
+
+export default function MultipleImageField({ length }: any) {
+  const dispatch = useAppDispatch();
+  const imageUploadHandler = (e: any) => {
+    console.log("Files from MultipleImageField", e.target.files);
+
+    dispatch(setSliderImage(e.target.files));
+  };
+  const sliderImages = useAppSelector<any[]>((state) => state.products.images);
+  console.log("sliderImages", sliderImages);
   return (
     <Stack direction={"row"} alignItems="center">
-      <Typography flex="3"> Slider Images</Typography>
+      <Typography flex="3">Sliders</Typography>
       <input
+        name="image[]"
         accept="image/*"
-        id="icon-product-thumbnail-photo"
+        id="icon-product-slider-photo"
         type="file"
         style={{ display: "none" }}
-        multiple
+        multiple={true}
+        // value={sliderImages}
         onChange={imageUploadHandler}
       />
       <Box
-        
         sx={{
           p: "2px 4px",
           display: "flex",
@@ -40,7 +46,7 @@ export default function EnhancedTextField({ length }: any) {
           sx={{ color: "custom.dark", border: 0, outline: 0 }}
           disableElevation
           component="label"
-          htmlFor="icon-product-thumbnail-photo"
+          htmlFor="icon-product-slider-photo"
         >
           Browse
         </Button>

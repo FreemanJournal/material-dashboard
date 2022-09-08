@@ -1,10 +1,14 @@
 import { InputAdornment, OutlinedInput, TextField } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import { forwardRef } from "react";
 import { useWatch } from "react-hook-form";
-import EnhancedTextField from "../components/productWidgets/Images/EnhancedTextField";
-import MiniCard from "../components/productWidgets/Images/MiniCard";
-import { useAppSelector } from "../redux/hooks";
-import { DiscountFormatCustom, MoneyFormatCustom } from "./NumberFormat";
+import { useAppSelector } from "../../../../redux/hooks";
+import { DiscountFormatCustom, MoneyFormatCustom } from "../../../../utilities/NumberFormat";
+import EnhancedTextField from "./EnhancedTextField";
+import MiniCard from "./MiniCard";
+import MultipleImageField from "./MultipleImageField";
+import SingleImageField from "./SingleImageField";
+
 export interface FormData {
   product_name: string;
   price_per_unit: string;
@@ -19,6 +23,7 @@ export function EnhancedImageStack() {
  
   const sliderImages = useAppSelector<any[]>((state)=>state.products.images)
 
+
   function EnhancedMiniCard() {
     if (sliderImages?.length > 0) {
       let allCard: any = [];
@@ -30,6 +35,8 @@ export function EnhancedImageStack() {
               size={sliderImages[key].size}
               key={key}
               cardId={key}
+              multiple={true}
+
             />
           );
         }
@@ -42,8 +49,45 @@ export function EnhancedImageStack() {
 
   return (
     <Stack gap={2}>
-      <EnhancedTextField
+      <MultipleImageField
         length={sliderImages?.length || 0}
+      />
+      <Stack direction={"row"} gap={3} flexWrap="wrap">
+        <EnhancedMiniCard />
+      </Stack>
+    </Stack>
+  ); // only re-render at the custom hook level, when firstName changes
+}
+export function EnhancedSingleImageStack() {
+ 
+  const thumbImages = useAppSelector<any[]>((state)=>state.products.thumbImg)
+
+  function EnhancedMiniCard() {
+    if (thumbImages?.length > 0) {
+      let allCard: any = [];
+      for (const key in thumbImages) {
+        if (typeof thumbImages[key] === "object") {
+          allCard.push(
+            <MiniCard
+              url={URL.createObjectURL(thumbImages[key])}
+              size={thumbImages[key].size}
+              key={key}
+              cardId={key}
+              multiple={false}
+            />
+          );
+        }
+      }
+    
+      return <>{allCard}</>;
+    }
+    return <></>;
+  }
+
+  return (
+    <Stack gap={2}>
+      <SingleImageField
+        length={thumbImages?.length || 0}
       />
       <Stack direction={"row"} gap={3} flexWrap="wrap">
         <EnhancedMiniCard />
@@ -55,7 +99,7 @@ export function EnhancedImageStack() {
 export function DiscountTextFiled({ control, register }: any) {
   const discountType = useWatch({
     control,
-    name: "discount_type", // without supply name will watch the entire form, or ['firstName', 'lastName'] to watch both
+    name: "discount_type", 
     defaultValue: "percent", // default value before the render
   });
 
@@ -82,5 +126,5 @@ export function DiscountTextFiled({ control, register }: any) {
       // helperText="This field is required."
       sx={{ flex: 1 }}
     />
-  ); // only re-render at the custom hook level, when firstName changes
+  ); 
 }

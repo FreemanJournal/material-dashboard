@@ -8,17 +8,19 @@ import {
   Typography,
 } from "@mui/material";
 import fileSize from "filesize";
-import { useAppDispatch } from "../../../redux/hooks";
-import { deleteImage } from "../../../redux/state/product.slice";
+import { useAppDispatch } from "../../../../redux/hooks";
+import { deleteImage } from "../../../../redux/state/product.slice";
 import "./miniCard.scss";
 export default function MiniCard({
   url,
   size,
   cardId,
+  multiple
 }: {
   url: string;
   size: number;
   cardId: string;
+  multiple:boolean
 }) {
   const file = fileSize.partial({ base: 2, standard: "jedec" });
   const dispatch = useAppDispatch();
@@ -28,7 +30,7 @@ export default function MiniCard({
       sx={{ width: 100, height: 100, position: "relative" }}
       className="productMiniCard"
     >
-      <div
+    { multiple ? <div
         style={{
           position: "absolute",
           padding: 0,
@@ -52,7 +54,7 @@ export default function MiniCard({
         >
           <Clear fontSize="small" />
         </IconButton>
-      </div>
+      </div> : <></>}
       <CardMedia
         component="img"
         height="50"

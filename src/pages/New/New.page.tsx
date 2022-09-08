@@ -1,10 +1,10 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import Navbar from "../../components/navbar/Navbar";
+import { FormData } from "../../components/productWidgets/Images/CustomFormElements/CustomFormElements";
 import ProductImages from "../../components/productWidgets/Images/Images";
 import ProductInfo from "../../components/productWidgets/information/Information";
 import Sidebar from "../../components/sidebar/Sidebar";
-import { FormData } from "../../utilities/CustomFormHook";
 
 export default function New() {
   const {
@@ -41,7 +41,7 @@ export default function New() {
           </Typography>
           <Stack className="" direction="row" gap={3}>
             <ProductInfo register={register} control={control} />
-            <ProductImages register={register}/>
+            <ProductImages />
           </Stack>
           <Box
             sx={{

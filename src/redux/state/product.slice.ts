@@ -1,15 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit"
 import type {PayloadAction} from "@reduxjs/toolkit"
 interface ProductState{
-    images:any []
+    images:any [],
+    thumbImg:any [],
 }
 const initialState:ProductState = {
-    images:[]
+    images:[],
+    thumbImg:[]
 }
 export const productSlice = createSlice({
     name:"products",
     initialState,
     reducers:{
+        setThumbnailImage:(state:ProductState,action:PayloadAction<[]>) =>{
+            state.thumbImg = action.payload
+        },
         setSliderImage:(state:ProductState,action:PayloadAction<[]>) =>{
             state.images = action.payload
         },
@@ -25,5 +30,5 @@ export const productSlice = createSlice({
 
 })
 
-export const {setSliderImage,deleteImage} = productSlice.actions
+export const {setThumbnailImage,setSliderImage,deleteImage} = productSlice.actions
 export default productSlice.reducer;

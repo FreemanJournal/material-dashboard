@@ -12,12 +12,12 @@ import {
   useFormControl,
 } from "@mui/material";
 import { forwardRef } from "react";
-import { DiscountTextFiled } from "../../../utilities/CustomFormHook";
 import { BootstrapInput } from "../../../utilities/MuiCustomComponent";
 import {
   MoneyFormatCustom,
   NumberFormatCustom,
 } from "../../../utilities/NumberFormat";
+import { DiscountTextFiled } from "../Images/CustomFormElements/CustomFormElements";
 import "./information.scss";
 export default function ProductInfo({ register, control }: any) {
   const { focused } = useFormControl() || {};
@@ -55,7 +55,7 @@ export default function ProductInfo({ register, control }: any) {
   return (
     <Box className="left bg_shadow" flex={1} p={3}>
       <Typography variant="subtitle2" sx={{ color: "custom.dark_light" }}>
-        Product Information
+         Information
       </Typography>
       <Divider />
       <Box p={3}>
